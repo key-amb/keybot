@@ -176,11 +176,18 @@ Where `<adapter>` is the name of your adapter without the `hubot-` prefix.
 
 ## Deployment
 
-    % heroku create --stack cedar
-    % heroku config:set HUBOT_HEROKU_KEEPALIVE_URL=$(heroku apps:info -s  | grep web-url | cut -d= -f2)
-    // Slack
-    % heroku config:set HUBOT_SLACK_TOKEN=<Your-API-Token>
-    % git push heroku master
+```
+// Only first app creations
+% heroku create --stack cedar
+
+// For existing heroku app
+% cp bin/heroku-config-set.sh tmp/
+% vi tmp/heroku-config-set.sh # modify some params
+% tmp/heroku-config-set.sh
+
+// After updating app
+% git push heroku master
+```
 
 If your Heroku account has been verified you can run the following to enable
 and add the Redis to Go addon to your app.
